@@ -1,0 +1,21 @@
+# Mac System Files
+.DS_Store
+
+# C and C++ Executables (We only want source code .c/.cpp)
+*.exe
+*.out
+*.o
+*.dSYM/
+
+# Java Compiled Class Files
+*.class
+*.jar
+
+# Python Junk
+__pycache__/
+*.pyc
+venv/
+.env
+
+# VS Code Settings (Optional, keeps personal settings private)
+.vscode/
