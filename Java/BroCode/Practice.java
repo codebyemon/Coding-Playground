@@ -1,44 +1,34 @@
 import java.io.*;
+import java.util.*;
 
 public class Practice {
     public static void main(String[] args) {
-        FileManager file = new FileManager();
-        file.createAndwrite("file1.txt", """
-                My name is emon.
-                I am a CSE student.
-                """);
-        file.copyFile("file1.txt", "test.txt");
+      Scanner sc = new Scanner(System.in);
+      String testInput=sc.nextLine();
+      try{
+        IntegerParser.parseInteger(testInput);
+      }catch(CustomNumberFormatException e){
+        System.out.println("Something went wrong: "+e.getMessage());
+      }
+           
     }
 }
 
-class FileManager {
-    public void createAndwrite(String fileName, String content) {
-        try{
-             // FileWriter creates the file if it doesn't exist
-            FileWriter writer = new FileWriter(fileName);
-            writer.write(content);
-            writer.close(); // Always close your streams!
-            System.out.println("Created and wrote to: " + fileName);
-        }
-        catch(IOException e) {
-            System.out.println("An error occurred while writing: " + e.getMessage());
-        }
+class CustomNumberFormatException extends Exception{
+    public CustomNumberFormatException(String message){
+        super(message);
     }
+}
 
-    public void copyFile(String fromFile, String toFile) {
-          try (BufferedReader reader = new BufferedReader(new FileReader(fromFile));
-             FileWriter writer = new FileWriter(toFile)) {
-            
-            String line;
-            while ((line = reader.readLine()) != null) {
-                writer.write(line);
-                // line.readLine() strips the newline, so we add it back if needed
-                writer.write(System.lineSeparator()); 
-            }
-            
-            System.out.println("Data successfully transferred to: " + toFile);
-        } catch (IOException e) {
-            System.out.println("Error during transfer: " + e.getMessage());
+class IntegerParser{
+    public static void parseInteger(String input) throws CustomNumberFormatException{
+        try{
+            int result = Integer.parseInt(input);
+            System.out.println("Successfully parsed: "+result);
         }
+        catch(Exception e){
+            throw new CustomNumberFormatException("The input is not valid");
+        }
+
     }
 }
