@@ -92,19 +92,19 @@ public:
             head = tail = newNode;
             return;
         }
-        if (head->data > value){
+        if (head->data >= value){
             newNode->next = head;
             head = newNode;
             return;
         }
-        if (tail->data < value){
+        if (tail->data <= value){
             tail->next = newNode;
             tail = newNode;
             return;
         }
         Node *temp = head;
         while (temp != NULL){
-            if (temp->data < value && temp->next->data > value){
+            if (temp->data < value && temp->next->data >= value){
                 newNode->next = temp->next;
                 temp->next = newNode;
                 return;
@@ -172,14 +172,18 @@ public:
             cout << "LL is empty";
             return;
         }
+        Node *temp=head;
         if (head->data == head->next->data){
-            pop_front();
+            head=head->next;
+            temp->next=NULL;
+            delete temp;
         }
         Node *curr = head;
         while (curr->next != NULL){
             if (curr->data == curr->next->data){
-                Node *temp = curr->next;
+                temp = curr->next;
                 curr->next = curr->next->next;
+                temp->next=NULL;
                 delete temp;
                 continue;
             }
@@ -192,12 +196,16 @@ public:
         temp = head;
         temp1 = head1;
         while (temp != NULL){
-            if (temp->data != temp1->data || temp->next == NULL || temp1->next == NULL){
+            if (temp1 == NULL || temp->data != temp1->data ){
                 cout << "Not identical\n";
                 return;
             }
             temp = temp->next;
             temp1 = temp1->next;
+        }
+        if(temp1!=NULL){
+            cout << "Not identical\n";
+            return;
         }
         cout << "Identical\n";
     }
@@ -210,14 +218,40 @@ public:
         while (head != NULL){
             Node *temp = head;
             head = head->next;
+            temp->next = NULL;
             delete temp;
         }
         tail = NULL;
     }
 
     void mergeTowLL(Node *head2, Node *tail2){
+        if(head==NULL){
+            head=head2;
+            tail=tail2;
+            return;
+        }
+        if(head2==NULL){
+            tail->next=head2;
+            return;
+        }
         tail->next=head2;
         tail=tail2;
+    }
+
+    void isSortedAsc(){
+        if (head == NULL){
+            cout << "LL is empty\n";
+            return;
+        }
+        Node *curr=head;
+        while(curr->next!=NULL){
+            if(curr->data>curr->next->data){
+                cout<<"Not sorted\n";
+                return;
+            }
+            curr=curr->next;
+        }
+        cout<<"Sorted\n";
     }
 
     void printLL(){
@@ -225,10 +259,10 @@ public:
             cout << "LL is empty\n";
             return;
         }
-        Node *temp = head;
-        while (temp != NULL){
-            cout << temp->data << "->";
-            temp = temp->next;
+        Node *curr = head;
+        while (curr != NULL){
+            cout << curr->data << "->";
+            curr = curr->next;
         }
         cout << "NULL\n";
     }
@@ -242,14 +276,20 @@ int main(){
     ll1.push_back(5);
     ll1.push_back(7);
     ll1.push_back(9);
+   
 
-    ll2.push_back(1);
-    ll2.push_back(3);
-    ll2.push_back(5);
-    ll2.push_back(7);
     ll2.push_back(9);
+    ll2.push_back(7);
+    ll2.push_back(5);
+    ll2.push_back(3);
+    ll2.push_back(1);
 
-    ll1.mergeTowLL(ll2.head, ll2.tail);
+    ll1.isSortedAsc();
+    ll2.isSortedAsc();
+
+
+    // ll1.mergeTowLL(ll2.head, ll2.tail);
     ll1.printLL();
+    
     
 }
