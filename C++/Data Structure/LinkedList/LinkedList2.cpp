@@ -68,7 +68,7 @@ public:
         tail = temp;
     }
 
-    void insert(int val, int pos){
+    void insertAtPos(int val, int pos){
         if(pos<0){
             cout<<"Invalid possition\n";
             return;
@@ -77,38 +77,42 @@ public:
             push_front(val);
             return;
         }
-        Node *temp = head;
+        Node *curr = head;
         for(int i=0;i<pos-1;i++){
-            if(temp==NULL){
+            if(curr==NULL){
                 cout<<"Invalid possition\n";
                 return;
             }
-            temp= temp->next;
+            curr= curr->next;
         }
         Node *newNode = new Node(val);
-        newNode->next=temp->next;
-        temp->next=newNode;
+        newNode->next=curr->next;
+        curr->next=newNode;
     }
 
     int search(int key){
-        Node *temp = head;
+        Node *curr = head;
         int idx =0;
 
-        while(temp != NULL){
-            if(temp->data==key){
+        while(curr != NULL){
+            if(curr->data==key){
                 return idx;
             }
-            temp=temp->next;
+            curr=curr->next;
             idx++;
         }
         return -1;
     }
 
     void printLL(){
-        Node *temp = head;
-        while (temp != NULL){
-            cout << temp->data << " -> ";
-            temp = temp->next;
+        if (head == NULL){
+            cout << "LL is empty\n";
+            return;
+        }
+        Node *curr = head;
+        while (curr != NULL){
+            cout << curr->data << " -> ";
+            curr = curr->next;
         }
         cout <<" NULL"<<endl;
     }
@@ -118,7 +122,7 @@ int main(){
     ll.push_front(3);
     ll.push_front(2);
     ll.push_front(1);
-    ll.insert(4,1);
+    ll.insertAtPos(4,1);
 
     
     ll.printLL();

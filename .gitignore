@@ -2,6 +2,7 @@
 .DS_Store
 
 # C and C++ Executables (We only want source code .c/.cpp)
+/bin/
 *.exe
 *.out
 *.o
