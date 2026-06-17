@@ -2,7 +2,11 @@
 #include<vector>
 using namespace std;
 
-//Stack using vector
+/*
+The order of stack is called LIFO.
+The most important functions of stack are push, pop and top
+Stack using vector
+*/
 
 class Stack{
     vector<int>v;

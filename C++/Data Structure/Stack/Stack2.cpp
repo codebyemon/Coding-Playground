@@ -7,7 +7,7 @@ class Stack{
 private:
     int cc;
     int top;
-    int* arr;
+    int *arr;
     
 public:
     Stack(int capacity){
