@@ -1,0 +1,6 @@
+STL stands for Standard Template Library.
+There are 4 parts in STL 
+1. Containers
+2. Iterators
+3. Algorithms
+4. Functors

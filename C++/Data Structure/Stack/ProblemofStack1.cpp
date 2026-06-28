@@ -2,7 +2,7 @@
 #include<stack>
 using namespace std;
 
-//The valid parentheses problem.
+//The valid parentheses problem. Leetcode problem 20.
 
 bool isValid(string str){
     stack<char>ch;
